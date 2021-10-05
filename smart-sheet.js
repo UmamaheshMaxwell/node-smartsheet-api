@@ -53,9 +53,9 @@ router.post("/import-excel/:id", (req, res)=>{
 var options = {
     folderId: folderId, 
     queryParameters: {
-      sheetName: 'Financial'
+      sheetName: 'NSA-Data'
     },
-    path: "./files/Financial-Sample.xlsx"
+    path: "./files/NSA-Data.xlsx"
   };
   
   // Import XLSX as sheet into Folder
@@ -63,6 +63,23 @@ var options = {
     .then(attachment => res.json(attachment))
     .catch(error => res.json(error));
 })
+
+router.post("/import-csv/:id", (req, res)=>{
+    const folderId = req.params.id
+ 
+ var options = {
+     folderId: folderId, 
+     queryParameters: {
+       sheetName: 'Address'
+     },
+     path: "./files/addresses.csv"
+   };
+   
+   // Import XLSX as sheet into Folder
+   smartsheet.sheets.importCsvSheetIntoFolder(options)
+     .then(attachment => res.json(attachment))
+     .catch(error => res.json(error));
+ })
 
 
 const PORT = 3001
