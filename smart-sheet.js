@@ -47,6 +47,17 @@ router.post("/add-sheets/:id", (req, res)=>{
     });
 })
 
+router.get("/get-folders", (req, res)=>{     
+    // List Sheets
+    smartsheet.home.listFolders()
+      .then(function(sheetList) {
+          res.json(sheetList)
+      })
+      .catch(function(error) {
+          res.json(error);
+      });
+})
+
 router.post("/import-excel/:id", (req, res)=>{
    const folderId = req.params.id
 
